@@ -3,11 +3,11 @@
 {% load staticfiles %}
 
 {% block metadescription %}
-  Shopping Cart page - Welcome to N.O.R Shop Online
+Shopping Cart page - Welcome to N.O.R Shop Online
 {% endblock %}
 
 {% block title %}
-  Cart - N.O.R Shop Online
+Cart - N.O.R Shop Online
 {% endblock %}
 
 {% block content %}
@@ -54,23 +54,23 @@
           </td>
           <td>{{ cart_item.sub_total }}</td>
           {% if cart_item.quantity < cart_item.product.stock %}
-              <td>
-                <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a"><i class="fas fa-plus-circle custom_icon"></i></a>
-                &nbsp;
-                <a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="custom_a"><i class="fas fa-minus-circle custom_icon"></i></a>
-                &nbsp;
-                <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_item"><i class="fas fa-trash-alt"></i></a>
-              </td>
+          <td>
+            <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a"><i class="fas fa-plus-circle custom_icon"></i></a>
+            &nbsp;
+            <a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="custom_a"><i class="fas fa-minus-circle custom_icon"></i></a>
+            &nbsp;
+            <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_item"><i class="fas fa-trash-alt"></i></a>
+          </td>
 
-            {% else %}
-            <td>
-              &nbsp;
-              <a href="" class="custom_a"><i class="fas fa-circle custom_icon"></i></a>
-              &nbsp;
-              <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_item"><i class="fas fa-trash-alt"></i></a>
-            </td>
-            <td></td>
-            {% endif %}
+          {% else %}
+          <td>
+            &nbsp;
+            <a href="" class="custom_a"><i class="fas fa-circle custom_icon"></i></a>
+            &nbsp;
+            <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_item"><i class="fas fa-trash-alt"></i></a>
+          </td>
+          <td></td>
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>
@@ -78,7 +78,7 @@
   </div>
   <div class="col-12 col-sm-12 col-lg-6 text-center">
     <table class="table my_suctom_table">
-      <thead class="my)custom_thead">
+      <thead class="my_custom_thead">
         <tr>
           <th>Checkout</th>
         </tr>
@@ -88,11 +88,28 @@
           <td>Please review your shopping cart item before proceeding with the order payment</td>
         </tr>
         <tr>
-          <td class="text-left">Your total is <strong>{{ total }} JPY</strong></td>
+          <td class="text-left">
+            Your total is: <strong>{{ total }} JPY</strong>
+          </td>
         </tr>
       </tbody>
     </table>
     <div class="mx-auto">
+      <form action="" method="POST">{% csrf_token %}
+        <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="{{ data_key }}"
+        data-amount="{{ data_total }}"
+        data-name="N.O.R Shop Online"
+        data-description="{{ description }}"
+        data-image="{% static 'img/logo.png' %}"
+        data-locale="auto"
+        data-currency="jpy"
+        data-shipping-address="true"
+        data-bulling-address="true"
+        data-zip-code="true">
+        </script>
+      </form>
       <a href="{% url 'shop:allProdCat' %}" class="btn-secondary btn-block my_custom_button">Continue Shopping</a>
     </div>
   </div>

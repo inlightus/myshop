@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block metadescription %}
+Sign up to get a new account with us. N.O.R Shop Online has a variety of items.
+{% endblock %}
+{% block title %}
+Create a New Product - N.O.R Shop Online
+{% endblock %}
+{% block content %}
+<div>
+  {% if not form.is_valid %}
+  <div class="mx-auto">
+    <br>
+    <h1 class="my_title text-center">Create a new Account</h1>
+    <br>
+    <div class="col-9 col-dm-6 col-lg-5 mx-auto bg-light">
+      <br>
+      <p>Enter the following information to create a new account.</p>
+      <form method="post">{% csrf_token %}
+        <p>{{ form | crispy }}</p>
+        <button type="submit" class="btn btn-secondary">Register Account</button>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <div class="mx-auto">
+    <br>
+    <h1 class="my_title text-center"></h1>
+    <br>
+    <div>
+      <p>
+        Dear Customer,
+        <br>
+        <br>
+        Your account has been created and it is ready to use.
+        <br>
+        <a href="{% url 'shop:allProdCat' %}">Continue shopping</a> and enjoy the variety of items that we have at N.O.R Shop Online
+      </p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

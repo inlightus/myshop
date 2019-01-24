@@ -40,7 +40,14 @@ INSTALLED_APPS = [
     'shop',
     'search_app',
     'cart',
+    'stripe',
+    'order',
+    'crispy_forms',
 ]
+
+# Stripte Settings
+STRIPE_PUBLISHABLE_KEY = 'pk_test_VUoAGRryA7jQXbWIsGJRHnBl'
+STRIPE_SECRET_KEY = 'sk_test_mCjd4cPvP99pSj9R2OasWElH'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,6 +68,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'shop', 'templates/'),
             os.path.join(BASE_DIR, 'search_app', 'templates/'),
             os.path.join(BASE_DIR, 'cart', 'templates/'),
+            os.path.join(BASE_DIR, 'order', 'templates/'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -117,9 +125,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -139,3 +147,5 @@ STATICFILES_DIRS = (
         )
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
